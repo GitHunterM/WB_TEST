@@ -1,0 +1,14 @@
+SELECT
+  c.id as cid,
+  c.title as ctitle,
+  g.id as gid,
+  g.title as gtitle,
+  IF (i2.id IS NULL, i.id, i2.id) as image_id
+FROM photo_category as c
+  JOIN photo_gallery as g ON (g.c_id=c.id AND c.is_published AND g.is_published)
+  JOIN photo_image as i ON (i.g_id = g.id AND i.is_published)
+  LEFT JOIN photo_image as i2 ON (i2.g_id = g.id AND i2.is_main_foto)
+WHERE c.id = 1
+GROUP BY g.id
+HAVING COUNT(i.id) > 0
+ORDER BY c.ordi, g.ordi, i.ordi;

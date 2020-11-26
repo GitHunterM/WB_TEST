@@ -1,0 +1,4 @@
+Для быстрого выполнения запросов необходимо присвоить индексы столбцам.
+В таблице design_drawnings столбец iso_number
+В таблице isometric столбец iso_code
+В таблице specification столбец draw_id and member_id

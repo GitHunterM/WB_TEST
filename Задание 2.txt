@@ -1,0 +1,50 @@
+Создание БД:
+База данных: `book`
+
+таблица `author`
+
+CREATE TABLE `author` (
+  `id` int(11) NOT NULL,
+  `author` varchar(15) NOT NULL,
+  `book_title` varchar(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+Дамп данных таблицы `author`
+
+INSERT INTO `author` (`id`, `author`, `book_title`) VALUES
+(1, 'Пушкин', 'Сказки'),
+(2, 'Пушкин', 'Евгений Онегин'),
+(3, 'Пушкин', 'Капитанская дочка'),
+(4, 'Оруеэлл', '1984'),
+(5, 'Оруеэлл', 'Скотный двор'),
+(6, 'Достоевский', 'Идиот');
+
+Структура таблицы `book_title`
+
+CREATE TABLE `book_title` (
+  `id` int(11) NOT NULL,
+  `book_title` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `year` int(11) NOT NULL,
+  `description` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number of pages` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+Дамп данных таблицы `book_title`
+
+INSERT INTO `book_title` (`id`, `book_title`, `year`, `description`, `number of pages`) VALUES
+(1, 'Сказки', 12, 'Книга \"Сказки\"', 175),
+(2, 'Евгений Онегин', 13, 'Книга \"Евгений Онегин\"', 215),
+(3, 'Капитанская дочка', 14, 'Книга \"Капитанская дочка\"', 264),
+(4, '1984', 1980, 'Книга \"1984\"', 298),
+(5, 'Скотный двор', 1986, 'Книга \"Скотный двор\"', 316),
+(6, 'Идиот', 17, 'Книга \"Идиот\"', 195);
+COMMIT;
+
+ЗАПРОСЫ
+Запрос на выборку книг:
+SELECT book_title FROM book_title
+Кол-во уникальных авторов в базе:
+SELECT DISTINCT author FROM author
+Сколько имеет книг каждый автор.
+SELECT author, COUNT(DISTINCT book_title) AS qty FROM author
+GROUP BY author
